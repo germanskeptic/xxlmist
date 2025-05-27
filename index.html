@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melancholic Elegance - New Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000000; /* Pure black background */
+            color: #E0E0E0; /* Light grey text */
+            font-family: 'EB Garamond', serif;
+            font-weight: 400; /* Regular weight for EB Garamond */
+            margin: 0;
+            padding: 0;
+            line-height: 1.7; /* Adjusted for EB Garamond */
+        }
+
+        /* Removed old .container styles */
+        /* Removed old main > section, main > section:first-child, main > section#poems styles */
+
+        .main-content { /* Class for the main element */
+            /* No specific width/padding here, sections will control their own */
+        }
+
+        .full-height-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem; /* Generous padding */
+            box-sizing: border-box;
+            text-align: center; /* Default text align for sections */
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left; /* Overridden for text content */
+        }
+        
+        /* For visual sections, text might be centered if directly in .full-height-section */
+        .visual-section .content-wrapper {
+             text-align: center; 
+             display: flex; 
+             align-items: center;
+             justify-content: center;
+             width: 100%; 
+             height: 100%; 
+             position: relative; /* For z-indexing content above mist */
+             z-index: 1;
+        }
+
+        #visual-section-2 { /* Ensure position relative for absolute children like mist-background */
+            position: relative;
+        }
+
+        .mist-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none; /* So it doesn't interfere with content */
+            background-color: #000000; /* Base for mist, can be omitted if body is black */
+        }
+
+        .mist-background::before, .mist-background::after {
+            content: '';
+            position: absolute;
+            width: 200%; /* Large elements */
+            height: 200%;
+            border-radius: 50%; /* Soft circular shapes */
+            opacity: 0;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .mist-background::before {
+            background-image: radial-gradient(ellipse at center, rgba(15, 15, 20, 0.08) 0%, rgba(15, 15, 20, 0) 60%);
+            animation-name: mistDrift1;
+            animation-duration: 50s; /* Slow drift */
+            animation-delay: -25s; /* Start partway */
+        }
+
+        .mist-background::after {
+            background-image: radial-gradient(ellipse at center, rgba(25, 30, 35, 0.06) 0%, rgba(25, 30, 35, 0) 55%);
+            animation-name: mistDrift2;
+            animation-duration: 70s; /* Slower, different drift */
+        }
+        
+        @keyframes mistDrift1 {
+            0% { transform: translate(-25%, -25%) scale(1); opacity: 0; }
+            25% { transform: translate(0%, -15%) scale(1.1); opacity: 0.04; }
+            50% { transform: translate(-15%, 0%) scale(1.2); opacity: 0.08; }
+            75% { transform: translate(0%, -20%) scale(1.1); opacity: 0.04; }
+            100% { transform: translate(-25%, -25%) scale(1); opacity: 0; }
+        }
+
+        @keyframes mistDrift2 {
+            0% { transform: translate(25%, 25%) scale(1.2); opacity: 0; }
+            25% { transform: translate(10%, 15%) scale(1.1); opacity: 0.03; }
+            50% { transform: translate(15%, 10%) scale(1); opacity: 0.06; }
+            75% { transform: translate(5%, 20%) scale(1.1); opacity: 0.03; }
+            100% { transform: translate(25%, 25%) scale(1.2); opacity: 0; }
+        }
+
+
+        .animation-container {
+            position: relative;
+            width: 60vmin; /* Responsive size */
+            height: 60vmin;
+            max-width: 400px; /* Max size */
+            max-height: 400px;
+            /* border: 1px dashed #111; */ /* For debugging */
+        }
+
+        .glyph-stroke {
+            position: absolute;
+            background-color: #1F1F1F; /* Dark grey, slightly visible on black */
+            opacity: 0;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        /* Keyframes for the glyph strokes */
+        @keyframes animateGlyphStrokeWidth { /* For horizontal strokes */
+            0% { opacity: 0; width: 0; }
+            10%, 50% { opacity: 0.15; width: var(--glyph-length, 100px); } /* Max opacity */
+            60%, 100% { opacity: 0; width: 0; }
+        }
+        @keyframes animateGlyphStrokeHeight { /* For vertical strokes */
+            0% { opacity: 0; height: 0; }
+            10%, 50% { opacity: 0.15; height: var(--glyph-length, 100px); } /* Max opacity */
+            60%, 100% { opacity: 0; height: 0; }
+        }
+
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'EB Garamond', serif; /* Ensure EB Garamond */
+            color: #FFFFFF; /* Brighter white for headings */
+            margin-bottom: 0.75em; /* Adjusted margin for EB Garamond */
+            font-weight: 600; /* Slightly bolder for headings */
+            letter-spacing: 0.5px; /* Subtle letter spacing for EB Garamond */
+        }
+
+        p {
+            margin-bottom: 1.5em; /* More space for EB Garamond paragraphs */
+            font-size: 1.1rem; /* Slightly larger base for p */
+            letter-spacing: 0.1px; /* Minimal spacing for readability */
+        }
+
+        a {
+            color: #C0C0C0; /* Light grey for links, slightly less bright than main text */
+            text-decoration: none;
+            transition: color 0.4s ease;
+        }
+
+        a:hover {
+            color: #FFFFFF; /* Pure white on hover */
+            /* text-decoration: underline; */ /* Optional: underline on hover */
+        }
+
+        /* Navigation */
+        .nav {
+            background-color: #0a0a0a; /* Very dark grey, almost black */
+            padding: 20px 0; /* Adjusted padding */
+            border-bottom: 1px solid #222222; /* Very subtle dark border */
+            text-align: center;
+            position: fixed; /* Optional: make nav fixed for full-height scrolling */
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav a {
+            color: #C0C0C0;
+            margin: 0 18px; /* Slightly more margin */
+            font-size: 1.05em; /* Adjusted size */
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            /* position: relative; */ /* Not needed if ::after is removed */
+            /* overflow: hidden; */   /* Not needed if ::after is removed */
+            transition: color 0.4s ease;
+        }
+
+        /* .nav a::after removed for simplicity */
+
+        .nav a:hover {
+            color: #FFFFFF;
+        }
+
+
+        /* OLD STYLES TO BE COMMENTED OUT/REMOVED */
+        /*
+        .hero, .hero h1, .hero p,
+        .section-title,
+        .card-container, .text-card, .poem-card, .text-card::before,
+        .text-card h3, .poem-card h3, .text-card p, .poem-card p, .poem-card pre,
+        .meta-text,
+        .btn, .add-btn, .submit-btn, .btn:hover, .add-btn:hover, .submit-btn:hover,
+        .qa-form, .contact-form, .qa-form label, .contact-form label,
+        input[type="text"], input[type="email"], textarea,
+        input[type="text"]:focus, input[type="email"]:focus, textarea:focus,
+        .qa-item, .qa-item h4, .qa-item p,
+        .footer
+        */
+        
+        /* Minimal styling for old .container if it's reused by nav or other static elements */
+        .nav .container { /* If nav uses a container for width constraint */
+             width: 90%;
+             max-width: 1200px; /* Max width for nav content */
+             margin: 0 auto;
+        }
+
+
+        /* Keyframes for Animations (can be kept if .reveal is used) */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll Reveal Base Styles (can be kept if .reveal is used) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px); /* Start slightly lower */
+            transition: opacity 1s ease-in-out, transform 1.2s ease-in-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Styling for contenteditable focus */
+        [contenteditable="true"]:focus {
+            outline: 1px dotted #555555; /* Subtle dark grey dotted outline */
+            background-color: #050505; /* Very subtle background change on focus */
+            box-shadow: 0 0 5px rgba(85, 85, 85, 0.2); /* Faint glow to indicate active editing */
+            caret-color: #E0E0E0; /* Ensure caret is visible on dark background */
+        }
+
+        /* Individual glyph styles */
+        .glyph-1 { width: 0; height: 2px; top: 20%; left: 30%; --glyph-length: 100px; animation-name: animateGlyphStrokeWidth; animation-duration: 15s; animation-delay: 0s; }
+        .glyph-2 { width: 2px; height: 0; top: 40%; left: 50%; --glyph-length: 80px; animation-name: animateGlyphStrokeHeight; animation-duration: 12s; animation-delay: 1s; transform: rotate(45deg); transform-origin: top left;}
+        .glyph-3 { width: 0; height: 1px; top: 60%; left: 25%; --glyph-length: 120px; animation-name: animateGlyphStrokeWidth; animation-duration: 18s; animation-delay: 2.5s; }
+        .glyph-4 { width: 1px; height: 0; top: 10%; left: 70%; --glyph-length: 90px; animation-name: animateGlyphStrokeHeight; animation-duration: 14s; animation-delay: 4s; }
+        .glyph-5 { width: 0; height: 2px; top: 80%; left: 40%; --glyph-length: 70px; animation-name: animateGlyphStrokeWidth; animation-duration: 16s; animation-delay: 5.5s; transform: rotate(-15deg); transform-origin: center left;}
+        .glyph-6 { width: 2px; height: 0; top: 30%; left: 15%; --glyph-length: 110px; animation-name: animateGlyphStrokeHeight; animation-duration: 13s; animation-delay: 7s; }
+        .glyph-7 { width: 0; height: 1px; top: 50%; left: 50%; --glyph-length: 150px; animation-name: animateGlyphStrokeWidth; animation-duration: 20s; animation-delay: 8.5s; transform: translateX(-50%) rotate(10deg); transform-origin: center;}
+
+        /* Quote Styles */
+        .quote-text {
+            font-size: 1.6rem; 
+            font-style: italic;
+            color: #A0A0A0;
+            opacity: 0;
+            transition: opacity 2s ease-in-out; /* Slower fade for quotes */
+            padding: 1rem; /* Breathing room */
+            max-width: 70%; /* Prevent quote from being too wide */
+        }
+        .quote-text.visible {
+            opacity: 1;
+        }
+        .quote-text .author {
+            display: block;
+            font-size: 1rem;
+            font-style: normal;
+            margin-top: 1.2em;
+            color: #777777; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container"> <!-- Assuming nav still uses a container -->
+            <a href="#text-section-1">Section 1 (Text)</a>
+            <a href="#visual-section-1">Section 2 (Visual)</a>
+            <a href="#text-section-2">Section 3 (Text)</a>
+            <a href="#visual-section-2">Section 4 (Visual)</a>
+            <a href="#text-section-3">Section 5 (Text)</a>
+        </div>
+    </nav>
+
+    <!-- Removed old <header class="hero"> -->
+
+    <main class="main-content">
+        <section class="full-height-section text-section" id="text-section-1">
+            <div class="content-wrapper">
+                <h2 contenteditable="true">First Chapter of Stillness</h2>
+                <p contenteditable="true">The world receded, not into darkness, but into a profound quiet. Here, in the heart of black, the mind found its own light, a flicker against the velvet void. Thoughts, unburdened by the clamor of day, stretched and breathed. This is the beginning of introspection, the first page turned in a volume of silence.</p>
+                <p contenteditable="true">Every shadow holds a story, every whisper of the universe a truth. We listen, not with ears, but with the soul, attuned to frequencies beyond the audible spectrum. The journey inward is the longest, yet most rewarding.</p>
+            </div>
+        </section>
+        <section class="full-height-section visual-section reveal" id="visual-section-1">
+             <div class="content-wrapper">
+                <div class="animation-container">
+                    <div class="glyph-stroke glyph-1"></div>
+                    <div class="glyph-stroke glyph-2"></div>
+                    <div class="glyph-stroke glyph-3"></div>
+                    <div class="glyph-stroke glyph-4"></div>
+                    <div class="glyph-stroke glyph-5"></div>
+                    <div class="glyph-stroke glyph-6"></div>
+                    <div class="glyph-stroke glyph-7"></div>
+                </div>
+             </div>
+        </section>
+        <section class="full-height-section text-section reveal" id="text-section-2">
+             <div class="content-wrapper">
+                <h2 contenteditable="true">Echoes in the Chamber</h2>
+                <p contenteditable="true">The second passage through silence reveals echoes. Not of sound, but of memory, of feeling. The black is a mirror, reflecting not the self, but the essence of self, stripped bare of pretense. It is in this unadorned state that clarity often arrives, unbidden, yet welcome.</p>
+                <p contenteditable="true">Consider the space between stars – not empty, but filled with the potential of creation, with the fabric of spacetime itself. So too, the spaces between thoughts hold their own power.</p>
+            </div>
+        </section>
+        <section class="full-height-section visual-section reveal" id="visual-section-2">
+            <div class="mist-background"></div>
+             <div class="content-wrapper">
+                 <div id="quote-container" class="quote-text">
+                     <!-- Quote will be injected here -->
+                 </div>
+             </div>
+        </section>
+        <section class="full-height-section text-section" id="text-section-3">
+             <div class="content-wrapper">
+                <h2 contenteditable="true">The Fabric of Night</h2>
+                <p contenteditable="true">Finally, the acceptance of the void. It is not an absence, but a presence. The pure black is the canvas upon which all light, all thought, all creation is painted. To understand the canvas is to understand the potential of the art. This final section is a meditation on that potential, a quiet acknowledgment of the infinite that resides within and without.</p>
+                <p contenteditable="true">Let the mind rest in this expanse. There is no need to fill it, only to experience it. The deepest truths are often found not in the search, but in the surrender to stillness.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Removed old <footer class="footer"> -->
+
+    <script>
+        // Scroll reveal logic from doReveal() can be kept if sections are marked with .reveal
+        // Smooth scrolling for anchor links (if nav links point to section IDs)
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Add a top offset if the nav is fixed
+                    const navHeight = document.querySelector('.nav') ? document.querySelector('.nav').offsetHeight : 0;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+                
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Existing doReveal() function for scroll reveal (can be used for new sections)
+        document.addEventListener('DOMContentLoaded', function() {
+            const revealElements = document.querySelectorAll('.reveal');
+            const cardContainers = document.querySelectorAll('.card-container'); // Note: .card-container is from old design. May need to remove this part if not used.
+
+            function doReveal() { 
+                const windowHeight = window.innerHeight;
+                const elementVisibleThreshold = 80; 
+
+                revealElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisibleThreshold) {
+                        if (!element.classList.contains('active')) {
+                            const dataDelay = parseFloat(element.dataset.revealDelay);
+                            if (!isNaN(dataDelay)) {
+                                element.style.transitionDelay = `${dataDelay}s`;
+                            }
+                            element.classList.add('active');
+                        }
+                    } else {
+                        // element.classList.remove('active'); // Optional: re-trigger on scroll up
+                        // element.style.transitionDelay = ''; 
+                    }
+                });
+
+                // The .card-container specific logic might be obsolete unless new cards are introduced.
+                // If not, this loop can be removed or adapted for other grouped elements.
+                if (cardContainers.length > 0) {
+                    cardContainers.forEach(container => {
+                        const cardsInContainer = container.querySelectorAll('.reveal'); 
+                        let delay = 0; 
+                        
+                        cardsInContainer.forEach(card => {
+                            const cardTop = card.getBoundingClientRect().top;
+                            if (cardTop < windowHeight - elementVisibleThreshold) {
+                                if (!card.classList.contains('active')) {
+                                    const dataDelay = parseFloat(card.dataset.revealDelay);
+                                    const currentDelay = !isNaN(dataDelay) ? dataDelay : delay;
+                                    
+                                    card.style.transitionDelay = `${currentDelay}s`;
+                                    card.classList.add('active');
+                                    
+                                    if (isNaN(dataDelay)) { 
+                                        delay += 0.2s; 
+                                    }
+                                }
+                            } else {
+                                // card.classList.remove('active'); // Optional
+                                // card.style.transitionDelay = '';
+                            }
+                        });
+                    });
+                }
+            }
+
+            // Initial check for reveal
+            doReveal();
+            window.addEventListener('scroll', doReveal);
+
+            // --- Mist with Quotes Logic ---
+            const philosophicalQuotes = [
+                { text: "He who has a why to live can bear almost any how.", author: "Friedrich Nietzsche" },
+                { text: "The two enemies of human happiness are pain and boredom.", author: "Arthur Schopenhauer" },
+                { text: "That which does not kill us makes us stronger.", author: "Friedrich Nietzsche" },
+                { text: "Every man takes the limits of his own field of vision for the limits of the world.", author: "Arthur Schopenhauer" },
+                { text: "To live is to suffer, to survive is to find some meaning in the suffering.", author: "Friedrich Nietzsche" }
+            ];
+
+            const quoteSection = document.getElementById('visual-section-2');
+            const quoteContainer = document.getElementById('quote-container');
+            let currentQuoteIndex = -1; // To ensure a new quote is picked if possible
+
+            if (quoteSection && quoteContainer) {
+                const quoteObserverOptions = {
+                    root: null, // relative to document viewport
+                    threshold: 0.4 // 40% visible
+                };
+
+                const quoteObserverCallback = (entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            let newQuoteIndex;
+                            do {
+                                newQuoteIndex = Math.floor(Math.random() * philosophicalQuotes.length);
+                            } while (philosophicalQuotes.length > 1 && newQuoteIndex === currentQuoteIndex); // Ensure new quote if possible
+                            currentQuoteIndex = newQuoteIndex;
+                            
+                            const quote = philosophicalQuotes[currentQuoteIndex];
+                            quoteContainer.innerHTML = `<span>${quote.text}</span><span class="author">${quote.author}</span>`;
+                            quoteContainer.classList.add('visible');
+                        } else {
+                            quoteContainer.classList.remove('visible');
+                        }
+                    });
+                };
+
+                const observer = new IntersectionObserver(quoteObserverCallback, quoteObserverOptions);
+                observer.observe(quoteSection);
+            }
+        });
+    </script>
+</body>
+</html>
